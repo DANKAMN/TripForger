@@ -10,7 +10,7 @@ function Provider ({
   return (
     <div>
         <Header />
-        {/* {children} */}
+        {children}
     </div>
   )
 }
