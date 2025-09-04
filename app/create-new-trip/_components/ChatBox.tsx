@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import axios from 'axios';
-import { Send } from 'lucide-react'
+import { Loader, Send } from 'lucide-react'
 import React, { useState } from 'react'
 
 type Message = {
@@ -14,10 +14,12 @@ type Message = {
 const ChatBox = () => {
   const [messages, setMessages] = useState<Message[]>([])
   const [userInput, setUserInput] = useState<string>()
+  const [loading, setLoading] = useState(false)
 
   const onSend = async () => {
     if (!userInput?.trim()) return;
 
+    setLoading(true)
     setUserInput('')
     const newMsg:Message = {
         role: 'user',
@@ -36,6 +38,7 @@ const ChatBox = () => {
     }])
 
     console.log(result.data)
+    setLoading(false)
   }
 
   return (
@@ -58,6 +61,16 @@ const ChatBox = () => {
                     </div>
                 )
             ))}
+
+            { 
+                loading && 
+                <div className="flex justify-start mt-2">
+                    <div className="max-w-lg bg-gray-100 text-black px-4 py-2 rounded-lg">
+                        <Loader className='animate-spin' />
+                    </div>
+                </div>
+            }
+            
             
         </section>
 
@@ -65,7 +78,7 @@ const ChatBox = () => {
         <section>
             <div className="border rounded-2xl p-4 shadow relative">
                 <Textarea 
-                placeholder="Create a trip for Paris from New York" 
+                placeholder="Start typing here..." 
                 className="w-full h-28 bg-transparent border-none focus-visible:right-0 shadow-none resize-none"
                 onChange={(event) => setUserInput(event.target.value)}
                 value={userInput}
