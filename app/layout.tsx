@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Provider from "./provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ConvexClientProvider } from "./ConvexClientProvider";
 
 
 export const metadata: Metadata = {
@@ -23,9 +23,9 @@ export default function RootLayout({
         <body
           className={inter.className}
         >
-          <Provider>
+          <ConvexClientProvider>
             {children}
-          </Provider>
+          </ConvexClientProvider>
         </body>
       </html>
     </ClerkProvider>
