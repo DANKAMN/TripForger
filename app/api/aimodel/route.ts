@@ -25,15 +25,15 @@ Rules:
 
 UI Guidance:
 With every response, include which UI component should be displayed for the user:
-- "budget", "groupSize", "TripDuration", or "Final"
-- Use "Final" only when all required details are collected and you are ready to generate the complete trip plan.
+- "budget", "groupSize", "tripDuration", or "final"
+- Use "final" only when all required details are collected and you are ready to generate the complete trip plan.
 
 Final Output:
 Once all information is collected, respond ONLY with a strict JSON object (no explanations or extra text) using the schema:
 
 {
   "resp": "Text Resp",
-  "ui": "budget/groupSize/TripDuration/Final"
+  "ui": "budget/groupSize/tripDuration/final"
 }
 `;
 
