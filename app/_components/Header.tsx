@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { SignInButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -37,7 +38,9 @@ const Header = () => {
         </div>
 
         {/* Menu Options */}
-        <Button>Get Started</Button>
+        <SignInButton mode='modal'>
+            <Button>Get Started</Button>
+        </SignInButton>
     </div>
   )
 }

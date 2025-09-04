@@ -1,8 +1,12 @@
+"use client";
+
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { ArrowDown, Globe2, Landmark, Plane, Send } from 'lucide-react'
-import React from 'react'
+import React, { use } from 'react'
 import HeroVideoDialog from "@/components/magicui/hero-video-dialog";
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 
 const suggestions = [
   {
@@ -24,6 +28,20 @@ const suggestions = [
 ]
 
 const Hero = () => {
+  const { user } = useUser();
+  const router = useRouter();
+
+  const onSend = () => {
+    // If user isn't signed in navigate to sign in page
+    if (!user) {
+      router.push('/sign-in')
+      return;
+    }
+
+    // Navigate to trip planner page
+    
+  }
+
   return (
     <div className="mt-24 w-full flex justify-center">
       <div className="max-w-3xl w-full text-center space-y-6">
@@ -40,7 +58,10 @@ const Hero = () => {
               placeholder="Create a trip for Paris from New York" 
               className="w-full h-28 bg-transparent border-none focus-visible:right-0 shadow-none resize-none"
             />
-            <Button size="icon" className="absolute bottom-6 right-6">
+            <Button 
+              size="icon" 
+              className="absolute bottom-6 right-6" onClick={() => onSend()}
+            >
               <Send className="h-4 w-4" />
             </Button>
           </div>
