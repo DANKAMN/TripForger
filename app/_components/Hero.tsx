@@ -39,7 +39,7 @@ const Hero = () => {
     }
 
     // Navigate to trip planner page
-    
+    router.push('/create-new-trip')
   }
 
   return (
