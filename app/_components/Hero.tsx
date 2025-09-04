@@ -8,7 +8,7 @@ import HeroVideoDialog from "@/components/magicui/hero-video-dialog";
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 
-const suggestions = [
+export const suggestions = [
   {
     title: 'Plan a New Journey',
     icon: <Globe2 className='text-blue-400 h-7 w-7' />
