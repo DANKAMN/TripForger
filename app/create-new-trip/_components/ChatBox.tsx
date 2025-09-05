@@ -12,11 +12,20 @@ import FinalUi from './FinalUi';
 import SelectDays from './SelectDays';
 
 type Message = {
-    role: string,
-    content: string,
-    ui?: string
+  role: string,
+  content: string,
+  ui?: string
 }
 
+type TripInfo = {
+  budget: string,
+  destination: string,
+  duration: string,
+  group_size: string,
+  origin: string,
+  hotels: any,
+  itinerary: any
+}
 const ChatBox = () => {
   const [messages, setMessages] = useState<Message[]>([])
   const [userInput, setUserInput] = useState<string>('')
@@ -24,6 +33,9 @@ const ChatBox = () => {
 
   // This state will hold the value from the Generative UI components
   const [uiSelectedValue, setUiSelectedValue] = useState<string | null>(null);
+
+  const [isFinal, setIsFinal] = useState(false)
+  const [tripDetails, setTripDetails] = useState<TripInfo>()
 
   // Use a useEffect hook to handle sending the selected UI option
   useEffect(() => {
@@ -52,11 +64,12 @@ const ChatBox = () => {
     try {
       // Send the entire conversation history to the API
       const result = await axios.post('/api/aimodel', {
-        messages: [...messages, newMsg]
+        messages: [...messages, newMsg],
+        isFinal: isFinal
       });
 
       // Update messages with the assistant's response
-      setMessages(prev => [
+      !isFinal && setMessages(prev => [
         ...prev,
         {
           role: 'assistant',
@@ -64,6 +77,10 @@ const ChatBox = () => {
           ui: result?.data?.ui
         }
       ]);
+
+      if (isFinal) {
+        setTripDetails(result?.data?.trip_plan)
+      }
       console.log(result.data);
     } catch (error) {
       console.error('API call failed:', error);
@@ -90,10 +107,26 @@ const ChatBox = () => {
     } else if (ui === 'tripDuration') {
       return <SelectDays onSelectedOption={handleUiSelection}/>
     } else if (ui === 'final') {
-      return <FinalUi viewTrip={() => console.log()} />
+      return <FinalUi viewTrip={() => console.log()} disable={!tripDetails}  />
     }
     return null;
   };
+
+  useEffect(() => {
+    const lastMsg = messages[messages.length - 1];
+
+    if (lastMsg ?.ui === 'final') {
+      setIsFinal(true);
+      setUserInput('Ok, Great!')
+      // onSend()
+    }
+  }, [messages]) 
+
+  useEffect(() => {
+    if (isFinal && userInput) {
+      onSend()
+    }
+  }, [isFinal])
 
   return (
     <div className="h-[85vh] flex flex-col">
