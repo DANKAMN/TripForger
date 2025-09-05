@@ -8,6 +8,8 @@ import React, { useState, useEffect } from 'react'
 import EmptyBoxState from './EmptyBoxState';
 import GroupSizeUi from './GroupSizeUi';
 import BudgetUi from './BudgetUi';
+import FinalUi from './FinalUi';
+import SelectDays from './SelectDays';
 
 type Message = {
     role: string,
@@ -85,6 +87,10 @@ const ChatBox = () => {
       return <BudgetUi onSelectedOption={handleUiSelection} />;
     } else if (ui === 'groupSize') {
       return <GroupSizeUi onSelectedOption={handleUiSelection} />;
+    } else if (ui === 'tripDuration') {
+      return <SelectDays onSelectedOption={handleUiSelection}/>
+    } else if (ui === 'final') {
+      return <FinalUi viewTrip={() => console.log()} />
     }
     return null;
   };
