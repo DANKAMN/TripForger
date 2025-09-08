@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from 'openai';
+import { aj } from "../arcjet/route";
+import { currentUser } from "@clerk/nextjs/server";
 
 export const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
@@ -152,6 +154,20 @@ Hotel address, Price, hotel image url, geo coordinates, rating, descriptions and
 
 export async function POST(req: NextRequest) {
     const { messages, isFinal } = await req.json()
+
+    const user = await currentUser();
+
+    const decision = await aj.protect(req, { userId: user?.primaryEmailAddress?.emailAddress?? '', requested: isFinal ? 5 : 0 }); // Deduct 5 tokens from the bucket
+    
+    //@ts-ignore
+    if (decision?.reason?.remaining == 0) {
+      return NextResponse.json({
+        resp: 'You’ve used up today’s free credits.',
+        ui: 'limit'
+      })
+    }
+
+    console.log("Decision result:", decision);
 
     try {
         const completion = await openai.chat.completions.create({

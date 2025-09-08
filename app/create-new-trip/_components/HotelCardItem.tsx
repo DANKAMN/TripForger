@@ -34,7 +34,15 @@ const HotelCardItem = ({ hotel }: Props) => {
 
   return (
     <div className="flex flex-col gap-1">
-        <Image className='rounded-xl shadow object-cover mb-2' src={photeUrl ? photeUrl : '/placeholder.jpg'} alt='hotel name' width={400} height={200} loading="lazy" />
+        <div className="w-full h-48 relative">
+          <Image
+            src={photeUrl ? photeUrl : '/placeholder.jpg'}
+            alt={hotel?.hotel_name || 'hotel name'}
+            fill   // let it fill the parent div
+            className="rounded-xl shadow object-cover mb-2"
+            loading="lazy"
+          />
+        </div>
         <h2 className='font-semibold text-lg'>{hotel?.hotel_name}</h2>
         <h2 className='text-gray-500'>{hotel?.hotel_address}</h2>
         <div className="flex justify-between items-center">
