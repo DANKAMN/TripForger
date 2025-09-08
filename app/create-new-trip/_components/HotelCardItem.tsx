@@ -1,18 +1,40 @@
+"use client";
+
 import { Button } from '@/components/ui/button'
 import { ExternalLink, Star, Wallet } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Hotel } from './ChatBox'
+import axios from 'axios'
 
 type Props = {
     hotel: Hotel
 }
 
 const HotelCardItem = ({ hotel }: Props) => {
+  const [photeUrl, setPhoteUrl] = useState<string>()
+
+  useEffect(() => {
+    hotel && GetGooglePlaceDetail()
+
+  }, [hotel])
+
+  const GetGooglePlaceDetail = async () => {
+    const result = await axios.post('/api/google-place-detail', {
+      placeName: hotel?.hotel_name
+    })
+
+    if (result?.data?.e) {
+      return
+    }
+    
+    setPhoteUrl(result?.data)
+  }
+
   return (
     <div className="flex flex-col gap-1">
-        <Image className='rounded-xl shadow object-cover mb-2' src={'/placeholder.jpg'} alt={hotel.hotel_name} width={400} height={200} />
+        <Image className='rounded-xl shadow object-cover mb-2' src={photeUrl ? photeUrl : '/placeholder.jpg'} alt='hotel name' width={400} height={200} loading="lazy" />
         <h2 className='font-semibold text-lg'>{hotel?.hotel_name}</h2>
         <h2 className='text-gray-500'>{hotel?.hotel_address}</h2>
         <div className="flex justify-between items-center">
