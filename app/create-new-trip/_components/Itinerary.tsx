@@ -3,6 +3,7 @@ import { Timeline } from "@/components/ui/timeline";
 import Image from 'next/image';
 import { Clock, ExternalLink, Star, Ticket, Timer, Wallet } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const TRIP_DATA= {
   budget: "Luxury",
@@ -397,7 +398,12 @@ const Itinerary = () => {
                 <p className='flex gap-2 text-green-600'> <Wallet /> {hotel?.price_per_night}</p>
                 <p className='text-yellow-500 flex gap-2'><Star /> {hotel?.rating}</p>
               </div>
-              <Button className='mt-1' variant={'outline'}>View</Button>
+              <Link href={`https://www.google.com/maps/search/?api=1&query='+${hotel?.hotel_name}`} target='_blank'
+                >
+                  <Button size={'sm'} variant={'outline'} className='w-full mt-1'>
+                    View <ExternalLink />
+                  </Button>
+              </Link>
               {/* <p className='line-clamp-2 text-gray-500'>{hotel?.description}</p> */}
             </div>
           ))}
@@ -417,7 +423,13 @@ const Itinerary = () => {
                 <p className='text-gray-500 line-clamp-2'>{activity?.place_details}</p>
                 <h2 className='flex gap-2 text-blue-500 line-clamp-1'> <Ticket />{activity?.ticket_pricing}</h2>
                 <p className='flex text-orange-400 line-clamp-1'> <Clock /> {activity?.best_time_to_visit}</p>
-                <Button size={'sm'} variant={'outline'} className='w-full mt-2'>View <ExternalLink /></Button>
+                <Link href={`https://www.google.com/maps/search/?api=1&query='+${activity?.place_name}`} target='_blank'
+                >
+                  <Button size={'sm'} variant={'outline'} className='w-full mt-2'>
+                    View <ExternalLink />
+                  </Button>
+                </Link>
+                
               </div>
             ))}
           </div>
