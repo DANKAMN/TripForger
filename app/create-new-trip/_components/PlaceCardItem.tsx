@@ -33,17 +33,17 @@ const PlaceCardItem = ({ activity }: Props) => {
   }
 
   return (
-    <div className='w-full h-48 relative'>
+    <div className=''>
       {photoUrl && (
-        <Image
-          src={photoUrl}
-          alt={activity?.place_name || "Activity"}
-          fill
-          width={400}
-          height={200}
-          className="object-cover rounded-xl"
-          loading="lazy"
-        />
+        <div className="relative w-full h-48"> 
+          <Image
+            src={photoUrl}
+            alt={activity?.place_name || "Activity"}
+            fill
+            className="object-cover rounded-xl"
+            loading="lazy"
+          />
+        </div>
       )}
       <h2 className='font-semibold text-lg'>{activity?.place_name}</h2>
       <p className='text-gray-500 line-clamp-2'>{activity?.place_details}</p>

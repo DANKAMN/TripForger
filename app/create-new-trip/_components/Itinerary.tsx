@@ -402,7 +402,7 @@ const Itinerary = () => {
       content: (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           {tripData?.hotels.map((hotel) => (
-            <HotelCardItem hotel={hotel} />
+            <HotelCardItem hotel={hotel} key={hotel.hotel_name} />
           ))}
         </div>
       ),
@@ -413,8 +413,8 @@ const Itinerary = () => {
         <div className="">
           <p className=''>Best Time: {dayData?.best_time_to_visit_day}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {dayData?.activities.map((activity, index) => (
-              <PlaceCardItem activity={activity} />
+            {dayData?.activities.map((activity) => (
+              <PlaceCardItem activity={activity} key={activity.place_name} />
             ))}
           </div>
         </div>
