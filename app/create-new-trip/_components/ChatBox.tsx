@@ -39,7 +39,8 @@ export type Hotel = {
   geo_coordinates: {
     latitude: number,
     longitude: number
-  }
+  },
+  rating: number
 }
 
 export type Activity = {
