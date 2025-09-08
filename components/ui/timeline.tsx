@@ -1,6 +1,5 @@
 "use client";
 import {
-  useMotionValueEvent,
   useScroll,
   useTransform,
   motion,
@@ -8,7 +7,7 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 
 import type { TripInfo } from '@/app/create-new-trip/_components/ChatBox';
-import { Calendar, User, Users, Wallet2 } from "lucide-react";
+import { Calendar, Users, Wallet2 } from "lucide-react";
 
 
 interface TimelineEntry {

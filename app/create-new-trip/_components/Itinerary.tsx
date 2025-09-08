@@ -1,9 +1,5 @@
 import React from 'react'
 import { Timeline } from "@/components/ui/timeline";
-import Image from 'next/image';
-import { Clock, ExternalLink, Star, Ticket, Timer, Wallet } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import HotelCardItem from './HotelCardItem';
 import PlaceCardItem from './PlaceCardItem';
 
