@@ -1,7 +1,7 @@
 import React from 'react'
 import { Timeline } from "@/components/ui/timeline";
 import Image from 'next/image';
-import { Star, Wallet } from 'lucide-react';
+import { Clock, ExternalLink, Star, Ticket, Timer, Wallet } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const TRIP_DATA= {
@@ -387,10 +387,10 @@ const Itinerary = () => {
     {
       title: "Recommended Hotels",
       content: (
-        <div className='grid grid-col-1 md:grid-cols-2 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           {TRIP_DATA.hotels.map((hotel, index) => (
             <div className="flex flex-col gap-1" key={index}>
-              <Image className='rounded-xl shadow object-cover mb-2' src={'/placeholder.jpg'} alt='placeholder img' width={400} height={200} />
+              <Image className='rounded-xl shadow object-cover mb-2' src={'/placeholder.jpg'} alt={hotel.hotel_name} width={400} height={200} />
               <h2 className='font-semibold text-lg'>{hotel?.hotel_name}</h2>
               <h2 className='text-gray-500'>{hotel?.hotel_address}</h2>
               <div className="flex justify-between items-center">
@@ -403,7 +403,27 @@ const Itinerary = () => {
           ))}
         </div>
       ),
-    }
+    },
+    ...TRIP_DATA.itinerary.map((dayData) => ({
+      title: `Day ${dayData?.day}`,
+      content: (
+        <div className="">
+          <p className=''>Best Time: {dayData?.best_time_to_visit_day}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {dayData?.activities.map((activity, index) => (
+              <div className="" key={index}>
+                <Image src={'/placeholder.jpg'} alt={activity.place_name} width={400} height={200} className='object-cover rounded-xl' />
+                <h2 className='font-semibold text-lg'>{activity?.place_name}</h2>
+                <p className='text-gray-500 line-clamp-2'>{activity?.place_details}</p>
+                <h2 className='flex gap-2 text-blue-500 line-clamp-1'> <Ticket />{activity?.ticket_pricing}</h2>
+                <p className='flex text-orange-400 line-clamp-1'> <Clock /> {activity?.best_time_to_visit}</p>
+                <Button size={'sm'} variant={'outline'} className='w-full mt-2'>View <ExternalLink /></Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }))
   ];
   return (
     <div className="relative w-full  h-[85vh] overflow-auto">
