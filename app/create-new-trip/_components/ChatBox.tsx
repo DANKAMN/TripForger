@@ -12,7 +12,7 @@ import FinalUi from './FinalUi';
 import SelectDays from './SelectDays';
 import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
-import { useUserDetail } from '@/app/provider';
+import { useTripDetail, useUserDetail } from '@/app/provider';
 import { v4 as uuidv4 } from 'uuid';
 
 type Message = {
@@ -83,7 +83,9 @@ const ChatBox = () => {
   const [tripDetails, setTripDetails] = useState<TripInfo>()
 
   const SaveTripDetail = useMutation(api.tripDetail.CreateTripDetail)
+
   const { userDetail, setUserDetail } = useUserDetail()
+  const { tripDetailInfo, setTripDetailInfo} = useTripDetail()
   // Use a useEffect hook to handle sending the selected UI option
   useEffect(() => {
     if (uiSelectedValue) {
@@ -127,6 +129,7 @@ const ChatBox = () => {
 
       if (isFinal) {
         setTripDetails(result?.data?.trip_plan)
+        setTripDetailInfo(result?.data?.trip_plan)
 
         const tripId = uuidv4()
 
@@ -184,7 +187,7 @@ const ChatBox = () => {
   }, [isFinal])
 
   return (
-    <div className="h-[85vh] flex flex-col">
+    <div className="h-[85vh] flex flex-col border shadow rounded-2xl p-5">
         {
             messages?.length === 0 && <EmptyBoxState onSelectOption={handleUiSelection} />
         }
