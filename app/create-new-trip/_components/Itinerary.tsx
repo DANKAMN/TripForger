@@ -411,7 +411,7 @@ const Itinerary = () => {
       title: `Day ${dayData?.day}`,
       content: (
         <div className="">
-          <p className=''>Best Time: {dayData?.best_time_to_visit_day}</p>
+          <p className='text-primary text-3xl'>Best Time: {dayData?.best_time_to_visit_day}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {dayData?.activities.map((activity) => (
               <PlaceCardItem activity={activity} key={activity.place_name} />
