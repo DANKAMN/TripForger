@@ -9,13 +9,13 @@ export function PopularCityList() {
   ));
 
   return (
-    <div className="w-full h-full py-20 ">
-      <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-3xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
-        Popular Destinations to Visit
-      </h2>
-      <Carousel items={cards} />
-    </div>
-  );
+  <div className="w-full h-full py-16 sm:py-20">
+    <h2 className="max-w-7xl px-4 mx-auto text-xl sm:text-2xl md:text-3xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
+      Popular Destinations to Visit
+    </h2>
+    <Carousel items={cards} />
+  </div>
+);
 }
 
 const DummyContent = ({ city, highlights, image }: { 
@@ -28,14 +28,14 @@ const DummyContent = ({ city, highlights, image }: {
       {highlights.map((point, index) => (
         <div
           key={`${city}-highlight-${index}`}
-          className={`flex flex-col md:flex-row items-center gap-6 bg-[#F5F5F7] dark:bg-neutral-800 p-8 md:p-12 rounded-3xl`}
+          className="flex flex-col md:flex-row items-center gap-6 bg-[#F5F5F7] dark:bg-neutral-800 p-6 sm:p-8 md:p-12 rounded-3xl"
         >
           {/* Text */}
           <div className="flex-1">
-            <h3 className="text-lg md:text-2xl font-bold text-neutral-800 dark:text-neutral-100">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-neutral-800 dark:text-neutral-100">
               {city} Highlight #{index + 1}
             </h3>
-            <p className="text-neutral-600 dark:text-neutral-400 mt-2 text-base md:text-xl leading-relaxed">
+            <p className="text-neutral-600 dark:text-neutral-400 mt-2 text-sm sm:text-base md:text-xl leading-relaxed">
               {point}
             </p>
           </div>
@@ -44,13 +44,14 @@ const DummyContent = ({ city, highlights, image }: {
           <img
             src={image}
             alt={`${city} highlight`}
-            className="flex-1 w-full h-60 md:h-72 object-cover rounded-2xl shadow-md"
+            className="flex-1 w-full h-48 sm:h-60 md:h-72 object-cover rounded-2xl shadow-md"
           />
         </div>
       ))}
     </div>
   );
 };
+
 
 
 // const data = [
