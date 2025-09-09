@@ -83,19 +83,41 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Video Section */}
-        <div className="flex items-center justify-center flex-col">
-            <h2 className='my-7 mt-20 flex gap-2 text-center text-base sm:text-lg'>
-              Not Sure where to start? <strong>See how it works</strong> <ArrowDown />
-            </h2>
-            
-            <HeroVideoDialog
-                className="block dark:hidden"
-                animationStyle="from-center"
-                videoSrc="https://www.example.com/dummy-video"
-                thumbnailSrc="https://mma.prnewswire.com/media/2401528/1_MindtripProduct.jpg?p=facebook"
-                thumbnailAlt="Dummy Video Thumbnail"
-            />
+        {/* Testimonials Section */}
+        <div className="mt-20">
+          <h2 className="text-xl sm:text-2xl font-bold text-center mb-10">
+            What Travelers Say
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="p-6 border rounded-xl shadow-sm bg-white">
+              <p className="text-gray-600 italic">
+                "TripForger made planning my trip effortless. I had a full itinerary in minutes!"
+              </p>
+              <h3 className="mt-4 font-semibold">— Sarah L.</h3>
+            </div>
+
+            <div className="p-6 border rounded-xl shadow-sm bg-white">
+              <p className="text-gray-600 italic">
+                "I discovered hidden gems I’d never have found on my own. Amazing experience!"
+              </p>
+              <h3 className="mt-4 font-semibold">— Daniel K.</h3>
+            </div>
+
+            <div className="p-6 border rounded-xl shadow-sm bg-white">
+              <p className="text-gray-600 italic">
+                "The AI suggestions were spot on. Saved me hours of research."
+              </p>
+              <h3 className="mt-4 font-semibold">— Maria R.</h3>
+            </div>
+
+            <div className="p-6 border rounded-xl shadow-sm bg-white">
+              <p className="text-gray-600 italic">
+                "Best travel planning tool I’ve ever used — can’t wait to use it again!"
+              </p>
+              <h3 className="mt-4 font-semibold">— James P.</h3>
+            </div>
+          </div>
         </div>
       </div>        
     </div>
