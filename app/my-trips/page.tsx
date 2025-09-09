@@ -8,8 +8,9 @@ import React, { useEffect, useState } from 'react'
 import { useUserDetail } from '../provider';
 import { TripInfo } from '../create-new-trip/_components/ChatBox';
 import Image from 'next/image';
+import MyTripCardItem from './_components/MyTripCardItem';
 
-type Trip = {
+export type Trip = {
     tripId: any,
     tripDetail: TripInfo,
     _id: string
@@ -46,12 +47,9 @@ const page = () => {
             </div>
         )}
 
-        <div className="">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
             {myTrips.map((trip, index) => (
-                <div className="" key={index}>
-                    <Image src={'/placeholder.jpg'} alt={trip.tripId} width={400} height={400} className='rounded-xl object-cover' />
-                    <h2 className='flex gap-2 font-semibold text-xl'>Trip to {trip?.tripDetail?.destination}</h2>
-                </div>
+                <MyTripCardItem trip={trip} key={index} />
             ))}
         </div>
     </div>
