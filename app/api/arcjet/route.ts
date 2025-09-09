@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getAj } from "@/lib/utils";
+// arcjet route.ts
+import { getAj } from "@/lib/utils/server";
 
 export async function GET(req: Request) {
   // Lazy-load Arcjet only on the server

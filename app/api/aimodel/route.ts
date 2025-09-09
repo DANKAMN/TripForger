@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
-import { getAj } from "@/lib/utils";
+// ai model API route
+import { getAj } from "@/lib/utils/server";
+
 import { auth, currentUser } from "@clerk/nextjs/server";
 
 const openai = new OpenAI({
