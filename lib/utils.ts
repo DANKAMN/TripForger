@@ -11,7 +11,7 @@ export function cn(...inputs: ClassValue[]) {
 
 /**
  * Server-only Arcjet wrapper
- * This avoids including Arcjet in client-side bundles
+ * Must only be called inside API routes or server actions
  */
 export async function getAj() {
   const { default: arcjet, tokenBucket } = await import("@arcjet/next");
