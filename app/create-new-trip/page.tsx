@@ -16,25 +16,34 @@ import {
 const CreateNewTrip = () => {
   const { tripDetailInfo, setTripDetailInfo } = useTripDetail()
   const [activeIndex, setActiveIndex] = useState(1)
+  const [mounted, setMounted] = useState(false)
 
+  // Only run this client-side
   useEffect(() => {
     setTripDetailInfo(null)
+    setMounted(true)
   }, [])
+
+  if (!mounted) return null; // 👈 prevents hydration mismatch
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-3 gap-5 p-10'>
-      <div className="">
-          <ChatBox />
+      <div>
+        <ChatBox />
       </div>
       <div className="col-span-2 relative">
         { activeIndex === 0 ? <Itinerary /> : <GlobalMap /> }
 
-        
-
         <Tooltip>
-          <TooltipTrigger className='absolute bottom-10 left-[50%]'><Button className='bg-black' size={'lg'}  onClick={() => setActiveIndex(activeIndex === 0 ? 1 : 0)}> 
-              { activeIndex === 0 ? <Plane /> :  <Globe2 /> }
-            </Button></TooltipTrigger>
+          <TooltipTrigger asChild>
+            <Button 
+              className="absolute bottom-10 left-[50%] bg-black" 
+              size="lg"
+              onClick={() => setActiveIndex(activeIndex === 0 ? 1 : 0)}
+            >
+              { activeIndex === 0 ? <Plane /> : <Globe2 /> }
+            </Button>
+          </TooltipTrigger>
           <TooltipContent>
             Switch between map and Trip
           </TooltipContent>
