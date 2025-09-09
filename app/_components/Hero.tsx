@@ -42,25 +42,26 @@ const Hero = () => {
     router.push('/create-new-trip')
   }
 
-  return (
-    <div className="mt-24 w-full flex justify-center">
+  return ( 
+    <div className="mt-24 w-full flex justify-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl w-full text-center space-y-6">
-        <h1 className="text-xl md:text-5xl font-bold md:whitespace-nowrap">
+        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold">
           Hey, I'm your personal <span className="text-primary">TripForger</span>
         </h1>
 
-        <p className="text-lg">Plan smarter, travel better — forged for you.</p>
+        <p className="text-base sm:text-lg">Plan smarter, travel better — forged for you.</p>
 
         {/* Input Box */}
         <div>
           <div className="border rounded-2xl p-4 shadow relative">
             <Textarea 
               placeholder="Create a trip for Paris from New York" 
-              className="w-full h-28 bg-transparent border-none focus-visible:right-0 shadow-none resize-none"
+              className="w-full h-28 bg-transparent border-none focus-visible:ring-0 shadow-none resize-none"
             />
             <Button 
               size="icon" 
-              className="absolute bottom-6 right-6" onClick={() => onSend()}
+              className="absolute bottom-6 right-6" 
+              onClick={() => onSend()}
             >
               <Send className="h-4 w-4" />
             </Button>
@@ -73,18 +74,20 @@ const Hero = () => {
             {[...suggestions, ...suggestions].map((suggestion, index) => (
               <div 
                 key={index}
-                className="flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer hover:bg-primary hover:text-white whitespace-nowrap flex-shrink-0"
+                className="flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer hover:bg-primary hover:text-white whitespace-nowrap flex-shrink-0 text-sm sm:text-base"
               >
                 {suggestion.icon}
-                <h2 className="text-sm">{suggestion.title}</h2>
+                <h2>{suggestion.title}</h2>
               </div>
             ))}
           </div>
         </div>
 
         {/* Video Section */}
-        <div className="flex items-center justify-center flex-col ">
-            <h2 className='my-7 mt-40 flex gap-2 text-center'>Not Sure where to start? <strong>See how it works</strong> <ArrowDown /></h2>
+        <div className="flex items-center justify-center flex-col">
+            <h2 className='my-7 mt-20 flex gap-2 text-center text-base sm:text-lg'>
+              Not Sure where to start? <strong>See how it works</strong> <ArrowDown />
+            </h2>
             
             <HeroVideoDialog
                 className="block dark:hidden"
@@ -97,6 +100,7 @@ const Hero = () => {
       </div>        
     </div>
   )
+
 }
 
 export default Hero
