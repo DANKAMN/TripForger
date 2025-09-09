@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import OpenAI from 'openai';
-import { aj } from "@/lib/utils";
+import OpenAI from "openai";
+import { getAj } from "@/lib/utils";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
 const openai = new OpenAI({
-  baseURL: 'https://openrouter.ai/api/v1',
+  baseURL: "https://openrouter.ai/api/v1",
   apiKey: process.env.OPENROUTER_API_KEY,
 });
 
@@ -153,47 +153,47 @@ Hotel address, Price, hotel image url, geo coordinates, rating, descriptions and
 }`
 
 export async function POST(req: NextRequest) {
-    const { messages, isFinal } = await req.json()
+  const { messages, isFinal } = await req.json();
 
-    const user = await currentUser();
+  const user = await currentUser();
+  const { has } = await auth();
+  const hasPremiumAccess = has({ plan: "monthly" });
+  console.log("hasPremiumAccess", hasPremiumAccess);
 
-    const { has } = await auth()
-    const hasPremiumAccess = has({ plan: 'monthly'});
-    console.log('hasPremiumAccess', hasPremiumAccess)
-    const decision = await aj.protect(req, { userId: user?.primaryEmailAddress?.emailAddress?? '', requested: isFinal ? 5 : 0 }); // Deduct 5 tokens from the bucket
-    
-    //@ts-ignore
-    if (decision?.reason?.remaining == 0 && !hasPremiumAccess) {
-      return NextResponse.json({
-        resp: 'You’ve used up today’s free credits.',
-        ui: 'limit'
-      })
-    }
+  // Lazy-load Arcjet to prevent client-side bundling issues
+  const aj = await getAj();
 
-    console.log("Decision result:", decision);
+  const decision = await aj.protect(req, {
+    userId: user?.primaryEmailAddress?.emailAddress ?? "",
+    requested: isFinal ? 5 : 0,
+  });
 
-    try {
-        const completion = await openai.chat.completions.create({
-            model: 'gpt-4o-mini',
-            response_format: {
-                type: 'json_object'
-            },
-            messages: [
-                {
-                    role: 'system',
-                    content: isFinal ? FINAL_PROMPT : PROMPT
-                },
-                ...messages
-            ],
-        });
+  //@ts-ignore
+  if (decision?.reason?.remaining === 0 && !hasPremiumAccess) {
+    return NextResponse.json({
+      resp: "You’ve used up today’s free credits.",
+      ui: "limit",
+    });
+  }
 
-        console.log(completion.choices[0].message)
+  console.log("Decision result:", decision);
 
-        const message = completion.choices[0].message;
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      response_format: { type: "json_object" },
+      messages: [
+        { role: "system", content: isFinal ? FINAL_PROMPT : PROMPT },
+        ...messages,
+      ],
+    });
 
-        return NextResponse.json(JSON.parse(message.content ?? ''))
-    } catch (error) {
-        return NextResponse.json(error)
-    }
-    
+    const message = completion.choices[0].message;
+    console.log("AI completion message:", message);
+
+    return NextResponse.json(JSON.parse(message.content ?? ""));
+  } catch (error) {
+    console.error("AI completion error:", error);
+    return NextResponse.json({ error: "Failed to generate AI response", details: error });
+  }
 }
