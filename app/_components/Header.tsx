@@ -24,31 +24,29 @@ const menuOptions = [
 
 const Header = () => {
   const { user } = useUser()
-
   const path = usePathname()
 
   return (
-    <div className='flex justify-between items-center p-4'>
+    <div className='flex flex-wrap justify-between items-center p-4 gap-4'>
         {/* Logo */}
         <Link href={'/'}>
             <div className="flex gap-2 items-center">
                 <Image src={'/logo.svg'} alt='logo' width={30} height={30} />
-                <h2 className='font-bold text-2xl'>TripForger</h2>
+                <h2 className='font-bold text-xl sm:text-2xl'>TripForger</h2>
             </div>
         </Link>
         
-
         {/* Menu Items */}
-        <div className="flex gap-5 items-center">
+        <div className="hidden md:flex gap-5 items-center">
             {menuOptions.map((menu, index) => (
                 <Link key={index} href={menu.path}>
-                    <h2 className='text-lg hover:scale-105 transition-all hover:text-primary'>{menu.name}</h2>
+                    <h2 className='text-base md:text-lg hover:scale-105 transition-all hover:text-primary'>{menu.name}</h2>
                 </Link>
             ))}
         </div>
 
         {/* Menu Options */}
-        <div className="flex gap-5 items-center">
+        <div className="flex gap-3 sm:gap-5 items-center">
             {
                 !user  ? (
                     <SignInButton mode='modal'>
@@ -67,5 +65,6 @@ const Header = () => {
     </div>
   )
 }
+
 
 export default Header
