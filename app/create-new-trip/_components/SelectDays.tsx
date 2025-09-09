@@ -11,20 +11,20 @@ const SelectDaysOptions = [
 
 function SelectDays({ onSelectedOption }: { onSelectedOption: (value: string) => void }) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 items-center mt-1">
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-3">
       {SelectDaysOptions.map((item) => (
         <div
           key={item.id}
-          className="p-3 border rounded-2xl bg-white hover:border-primary cursor-pointer flex flex-col items-center text-center"
           onClick={() => onSelectedOption(item.value)}
+          className="p-4 border rounded-2xl bg-white hover:border-primary cursor-pointer flex flex-col items-center text-center transition"
         >
-          <h2 className="text-3xl">{item.icon}</h2>
-          <h2 className="text-lg font-semibold mt-1">{item.title}</h2>
-          <p className="text-sm text-gray-500">{item.desc}</p>
+          <h2 className="text-2xl md:text-3xl">{item.icon}</h2>
+          <h2 className="text-sm md:text-base font-semibold mt-1">{item.title}</h2>
+          <p className="text-xs md:text-sm text-gray-500">{item.desc}</p>
         </div>
       ))}
     </div>
-  );
+  )
 }
 
 export default SelectDays;

@@ -187,58 +187,61 @@ const ChatBox = () => {
   }, [isFinal])
 
   return (
-  <div className="h-[75vh] md:h-[85vh] flex flex-col border shadow rounded-2xl p-4 sm:p-5">
-    {/* Empty State */}
-    {messages?.length === 0 && <EmptyBoxState onSelectOption={handleUiSelection} />}
-
-    {/* Display Messages */}
-    <section className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-2">
-      {messages.map((msg: Message, index) => (
-        msg.role === 'user' ? (
-          <div className="flex justify-end" key={index}>
-            <div className="max-w-[80%] sm:max-w-lg bg-primary text-white px-4 py-2 rounded-lg text-sm sm:text-base">
-              {msg.content}
-            </div>
-          </div>
-        ) : (
-          <div className="flex justify-start" key={index}>
-            <div className="max-w-[80%] sm:max-w-lg bg-gray-100 text-black px-4 py-2 rounded-lg text-sm sm:text-base">
-              {msg.content}
-              {RenderGenerativeUI(msg.ui ?? '')}
-            </div>
-          </div>
-        )
-      ))}
-      
-      {loading && (
-        <div className="flex justify-start">
-          <div className="max-w-[80%] sm:max-w-lg bg-gray-100 text-black px-4 py-2 rounded-lg">
-            <Loader className="animate-spin" />
-          </div>
-        </div>
+    <div className="h-[85vh] md:h-[85vh] w-full md:w-auto flex flex-col border shadow rounded-2xl p-4 sm:p-5">
+      {/* Empty State */}
+      {messages?.length === 0 && (
+        <EmptyBoxState onSelectOption={handleUiSelection} />
       )}
-    </section>
 
-    {/* User Input */}
-    <section>
-      <div className="border rounded-2xl p-4 shadow relative">
-        <Textarea
-          placeholder="Start typing here..."
-          className="w-full h-24 sm:h-28 bg-transparent border-none focus-visible:ring-0 shadow-none resize-none"
-          onChange={(event) => setUserInput(event.target.value)}
-          value={userInput}
-        />
-        <Button
-          size="icon"
-          className="absolute bottom-6 right-6"
-          onClick={handleManualInputSend}
-        >
-          <Send className="h-4 w-4" />
-        </Button>
-      </div>
-    </section>
-  </div>
-);
+      {/* Display Messages */}
+      <section className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-3">
+        {messages.map((msg: Message, index) =>
+          msg.role === "user" ? (
+            <div className="flex justify-end" key={index}>
+              <div className="max-w-[95%] sm:max-w-lg bg-primary text-white px-4 py-2 rounded-lg text-sm sm:text-base break-words">
+                {msg.content}
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-start" key={index}>
+              <div className="max-w-[95%] sm:max-w-lg bg-gray-100 text-black px-4 py-2 rounded-lg text-sm sm:text-base break-words">
+                {msg.content}
+                {RenderGenerativeUI(msg.ui ?? "")}
+              </div>
+            </div>
+          )
+        )}
+
+        {loading && (
+          <div className="flex justify-start">
+            <div className="max-w-[95%] sm:max-w-lg bg-gray-100 text-black px-4 py-2 rounded-lg">
+              <Loader className="animate-spin" />
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* User Input */}
+      <section>
+        <div className="border rounded-2xl p-4 shadow relative bg-white">
+          <Textarea
+            placeholder="Start typing here..."
+            className="w-full h-24 sm:h-28 bg-transparent border-none focus-visible:ring-0 shadow-none resize-none"
+            onChange={(event) => setUserInput(event.target.value)}
+            value={userInput}
+          />
+          <Button
+            size="icon"
+            className="absolute bottom-6 right-6"
+            onClick={handleManualInputSend}
+          >
+            <Send className="h-4 w-4" />
+          </Button>
+        </div>
+      </section>
+    </div>
+  );
+
 };
 
 export default ChatBox;

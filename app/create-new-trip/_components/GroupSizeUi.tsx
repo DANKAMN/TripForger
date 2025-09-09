@@ -9,17 +9,16 @@ const SelectTravelersList = [
 
 function GroupSizeUi({ onSelectedOption }: any) {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 items-center mt-1">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mt-3">
             {SelectTravelersList.map((item, index) => (
-                <div
-                className="p-3 border rounded-2xl bg-white hover:border-primary cursor-pointer"
+            <div
                 key={index}
-                // Change here: Pass only the title string
                 onClick={() => onSelectedOption(item.title)}
-                >
-                    <h2>{item.icon}</h2>
-                    <h2>{item.title}</h2>
-                </div>
+                className="p-4 border rounded-2xl bg-white hover:border-primary cursor-pointer flex flex-col items-center text-center transition"
+            >
+                <h2 className="text-2xl">{item.icon}</h2>
+                <h2 className="text-sm md:text-base mt-2 font-medium">{item.title}</h2>
+            </div>
             ))}
         </div>
     )
