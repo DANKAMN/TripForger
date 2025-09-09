@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { SignInButton, UserButton, useUser } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation';
 import React from 'react'
 
 const menuOptions = [
@@ -22,15 +23,20 @@ const menuOptions = [
 ]
 
 const Header = () => {
-    const { user } = useUser()
+  const { user } = useUser()
+
+  const path = usePathname()
 
   return (
     <div className='flex justify-between items-center p-4'>
         {/* Logo */}
-        <div className="flex gap-2 items-center">
-            <Image src={'/logo.svg'} alt='logo' width={30} height={30} />
-            <h2 className='font-bold text-2xl'>TripForger</h2>
-        </div>
+        <Link href={'/'}>
+            <div className="flex gap-2 items-center">
+                <Image src={'/logo.svg'} alt='logo' width={30} height={30} />
+                <h2 className='font-bold text-2xl'>TripForger</h2>
+            </div>
+        </Link>
+        
 
         {/* Menu Items */}
         <div className="flex gap-5 items-center">
@@ -49,7 +55,9 @@ const Header = () => {
                         <Button>Get Started</Button>
                     </SignInButton>
                 ) : (
-                    <Link href={'/create-new-trip'}>
+                    path == '/create-new-trip' ? <Link href={'/my-trips'}>
+                        <Button>My Trips</Button>
+                    </Link> : <Link href={'/create-new-trip'}>
                         <Button>Forge a Trip</Button>
                     </Link>
                 )
