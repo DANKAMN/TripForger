@@ -12,6 +12,7 @@
     "@arcjet/next": "^1.0.0-beta.11",
     "@clerk/nextjs": "^6.31.8",
     "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tooltip": "^1.2.8",
     "@tabler/icons-react": "^3.34.1",
     "axios": "^1.11.0",
     "class-variance-authority": "^0.7.1",
