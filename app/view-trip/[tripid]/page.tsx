@@ -31,12 +31,12 @@ const ViewTrip = () => {
   }
 
   return (
-    <div className='grid grid-cols-5'>
-      <div className="col-span-3">
+    <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 p-4 lg:p-8">
+      <div className="lg:col-span-3">
         <Itinerary />
       </div>
 
-      <div className="col-span-2">
+      <div className="lg:col-span-2">
         <GlobalMap />
       </div>
     </div>
