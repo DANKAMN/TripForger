@@ -4,7 +4,7 @@
 
 AI-powered Full Stack Trip Planner built with **Next.js, React, TypeScript, Arcjet, Convex, Clerk, Mapbox, and Google Places API** ✈️  
 
-![TripForger Preview](public/screenshot-tripforger.png)
+![TripForger Preview](https://raw.githubusercontent.com/DANKAMN/tripforger/main/public/screenshot-tripforger.png)
 
 ---
 
