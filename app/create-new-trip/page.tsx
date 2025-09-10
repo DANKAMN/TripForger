@@ -45,7 +45,7 @@ const CreateNewTrip = () => {
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            Switch between map and Trip
+            Switch between map and Trip Itinerary
           </TooltipContent>
         </Tooltip>
       </div>
