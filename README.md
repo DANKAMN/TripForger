@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+````markdown
+# 🌍 TripForger  
 
-First, run the development server:
+AI-powered Full Stack Trip Planner built with **Next.js, React, TypeScript, Arcjet, Convex, Clerk, Mapbox, and Google Places API** ✈️  
+
+![TripForger Preview](/public/screenshot-tripforger.png)
+
+---
+
+## 🚀 Project Overview  
+
+TripForger is an AI-driven web application that helps users **plan personalized trips** effortlessly.  
+It integrates AI for trip suggestions, interactive maps with **Mapbox**, real-time location data via **Google Places API**, and secure authentication through **Clerk**.  
+
+✨ Features:  
+- 🤖 **AI Trip Planner** – Generate custom trip itineraries instantly.  
+- 🗺️ **Interactive Maps** – Explore routes and locations via Mapbox.  
+- 🔒 **User Authentication** – Managed with Clerk.  
+- 📍 **Location Search** – Powered by Google Places API.  
+- ⚡ **Rate Limiting & Security** – Using Arcjet.  
+- 💾 **Serverless Backend** – Convex for queries and mutations.  
+- 📧 **Email Integration** – Resend for notifications.  
+- 🎨 **UI/UX** – Built with TailwindCSS, Radix UI, Lucide & Tabler icons.  
+
+💡 **Note:** Free users are limited to **two trip builds every 24 hours**.  
+
+---
+
+## 🛠️ Tech Stack  
+
+- **Frontend**: Next.js 15, React 19, TypeScript, TailwindCSS, Radix UI  
+- **Backend**: Convex (serverless functions)  
+- **Authentication**: Clerk  
+- **APIs**: OpenAI, Google Places API, Mapbox  
+- **Security & Rate Limiting**: Arcjet  
+- **Email**: Resend  
+- **Other**: Axios, UUID, Motion animations  
+
+---
+
+## ⚙️ Installation  
+
+Clone the repository:  
+
+```bash
+git clone https://github.com/DANKAMN/tripforger.git
+cd tripforger
+````
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Set up environment variables:
+
+Create a `.env.local` file in the root directory and configure the following keys:
+
+```bash
+# Next.js
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
+CLERK_SECRET_KEY=your_secret_key
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+
+# Arcjet
+ARCJET_KEY=your_arcjet_key
+
+# Convex
+NEXT_PUBLIC_CONVEX_URL=your_convex_url
+
+# APIs
+NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token
+NEXT_PUBLIC_GOOGLE_PLACES_API_KEY=your_google_places_api_key
+OPENAI_API_KEY=your_openai_api_key
+
+# Resend
+RESEND_API_KEY=your_resend_api_key
+```
+
+---
+
+## 🏃 Running the App
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Production Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app will be available at [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📦 Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* `npm run dev` → Start development server
+* `npm run build` → Build the project for production
+* `npm run start` → Start the production server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📌 Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project is optimized for deployment on **Vercel**.
+Make sure your environment variables are set in the Vercel dashboard before deploying.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repo
+2. Create a new branch (`feature/new-feature`)
+3. Commit changes
+4. Open a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.

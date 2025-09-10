@@ -73,7 +73,7 @@ export default function ContactPage() {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="w-full bg-primary text-white p-3 rounded-lg hover:bg-blue-700 transition"
+          className="w-full bg-primary text-white p-3 rounded-lg hover:bg-black transition"
         >
           {status === "loading" ? "Sending..." : "Send Message"}
         </button>
