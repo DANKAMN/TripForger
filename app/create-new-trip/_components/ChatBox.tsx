@@ -14,6 +14,7 @@ import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useTripDetail, useUserDetail } from '@/app/provider';
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/navigation';
 
 type Message = {
   role: string,
@@ -86,6 +87,9 @@ const ChatBox = () => {
 
   const { userDetail, setUserDetail } = useUserDetail()
   const { tripDetailInfo, setTripDetailInfo} = useTripDetail()
+  const [tripId, setTripId] = useState<string | null>(null);
+
+  const router = useRouter();
   // Use a useEffect hook to handle sending the selected UI option
   useEffect(() => {
     if (uiSelectedValue) {
@@ -131,11 +135,12 @@ const ChatBox = () => {
         setTripDetails(result?.data?.trip_plan)
         setTripDetailInfo(result?.data?.trip_plan)
 
-        const tripId = uuidv4()
-
+        const newTripId = uuidv4();
+        setTripId(newTripId);
+        
         await SaveTripDetail({
           tripDetail: result?.data?.trip_plan,
-          tripId: tripId,
+          tripId: newTripId,
           uid: userDetail?._id
         })
       }
@@ -165,7 +170,7 @@ const ChatBox = () => {
     } else if (ui === 'tripDuration') {
       return <SelectDays onSelectedOption={handleUiSelection}/>
     } else if (ui === 'final') {
-      return <FinalUi viewTrip={() => console.log()} disable={!tripDetails}  />
+      return <FinalUi viewTrip={() => router.push(`/view-trip/${tripId}`)} disable={!tripDetails}  />
     }
     return null;
   };
